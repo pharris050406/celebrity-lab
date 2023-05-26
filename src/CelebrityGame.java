@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The framework for the Celebrity Game project
@@ -23,8 +24,14 @@ public class CelebrityGame
 	/**
 	 * Builds the game and starts the GUI
 	 */
+
+	Celebrity gameCelebrity;
+	CelebrityFrame gameWindow;
+	ArrayList<Celebrity> celebGameList = new ArrayList<Celebrity>();
+
 	public CelebrityGame()
 	{
+		gameWindow = new CelebrityFrame(this);
 	}
 
  /**
@@ -46,8 +53,11 @@ public class CelebrityGame
 	 */
 	public boolean processGuess(String guess)
 	{
-    /* To be implemented */
-
+		if(guess.trim().equalsIgnoreCase(gameCelebrity.getName())){
+			celebGameList.remove(0);
+			gameCelebrity = celebGameList.get(0);
+			return true;
+		}
 		return false;
 	}
   /**
@@ -77,6 +87,7 @@ public class CelebrityGame
 	public void addCelebrity(String name, String guess, String type)
 	{
 		/* to be implemented */
+		celebGameList.add(new Celebrity(name, guess, type));
 	}
 
 	/**
@@ -86,9 +97,7 @@ public class CelebrityGame
 	 */
 	public boolean validateCelebrity(String name)
 	{
-    /* To be implemented */
-
-		return false;
+		return name.length()>3;
 	}
 
 	/**
@@ -101,8 +110,7 @@ public class CelebrityGame
 	public boolean validateClue(String clue, String type)
 	{
     /* To be implemented */
-
-		return false;
+		return clue.length()>9;
 	}
 
 	/**
@@ -112,9 +120,7 @@ public class CelebrityGame
 	 */
 	public int getCelebrityGameSize()
 {
-    /* To be implemented */
-
-		return 0;
+		return celebGameList.size();
 	}
 
 	/**
@@ -125,8 +131,6 @@ public class CelebrityGame
 	 */
 	public String sendClue()
 	{
-    /* To be implemented */
-
-		return null;
+		return gameCelebrity.getHint();
 	}
 }
